@@ -41,7 +41,9 @@ if uploaded_file is not None:
         dot = Digraph()
         def add_nodes(node, count=0):
             if node and count < 100:
-                label = f"{chr(node.char) if node.char and 32<=node.char<=126 else node.char}\n{node.freq}"
+                # Jika ada karakter, tampilkan karakternya; jika node internal, tampilkan string kosong saja
+                char_label = chr(node.char) if node.char and 32<=node.char<=126 else (str(node.char) if node.char else "")
+                label = f"{char_label}\n{node.freq}"
                 dot.node(str(id(node)), label, shape='circle' if not node.char else 'box')
                 if node.left:
                     dot.edge(str(id(node)), str(id(node.left)), '0')
