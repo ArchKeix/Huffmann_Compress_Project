@@ -9,9 +9,12 @@ st.set_page_config(page_title="Huffman Hub", layout="wide")
 st.title("🗜️ Huffman Compression Tool")
 st.markdown("Algoritma kompresi lossless untuk segala jenis file.")
 
-with st.sidebar:
-    st.header("Upload File")
-    uploaded_file = st.file_uploader("Pilih file apapun", type=None)
+# Menghapus sidebar
+st.title("🗜️ Huffman Compression Tool")
+st.markdown("Algoritma kompresi lossless untuk segala jenis file.")
+
+# File uploader di tengah
+uploaded_file = st.file_uploader("Pilih file apapun untuk dikompresi", type=None)
 
 if uploaded_file is not None:
     data = uploaded_file.getvalue()
