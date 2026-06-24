@@ -33,20 +33,20 @@ if uploaded_file is not None:
         st.bar_chart(freq_df.set_index('Byte'))
         
     with tab2:
-        st.info("Pohon Huffman (Maksimal 100 node pertama untuk performa)")
+        st.info("Visualisasi Pohon Huffman")
         dot = Digraph()
-        def add_nodes(node, count=0):
-            if node and count < 100:
+        def add_nodes(node):
+            if node:
                 # Jika ada karakter, tampilkan karakternya; jika node internal, tampilkan string kosong saja
                 char_label = chr(node.char) if node.char and 32<=node.char<=126 else (str(node.char) if node.char else "")
                 label = f"{char_label}\n{node.freq}"
                 dot.node(str(id(node)), label, shape='circle' if not node.char else 'box')
                 if node.left:
                     dot.edge(str(id(node)), str(id(node.left)), '0')
-                    add_nodes(node.left, count + 1)
+                    add_nodes(node.left)
                 if node.right:
                     dot.edge(str(id(node)), str(id(node.right)), '1')
-                    add_nodes(node.right, count + 1)
+                    add_nodes(node.right)
         add_nodes(root)
         st.graphviz_chart(dot)
 
